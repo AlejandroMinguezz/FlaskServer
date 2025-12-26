@@ -1,0 +1,1 @@
+Factura número 12345`nTotal: 100 EUR`nIVA incluido

@@ -1,0 +1,5 @@
+# Este archivo mantiene el directorio en git
+# Los modelos entrenados (.pkl) se generan automáticamente y no se suben al repositorio
+# Para usar el sistema, primero genera datos y entrena el modelo:
+#   python -m ai.data_generation.generate_dataset
+#   python -m ai.training.train_model

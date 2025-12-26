@@ -1,0 +1,41 @@
+NÓMINA DEL MES DE MARZO 2025
+
+EMPRESA:
+ABC Corporación S.A.
+CIF: A12345678
+C/ Empresarial, 100
+28023 Madrid
+
+TRABAJADOR:
+Apellidos: García Pérez
+Nombre: Juan
+DNI: 12345678A
+Nº Afiliación S.S.: 281234567890
+Categoría profesional: Técnico Superior
+Grupo de cotización: 3
+
+PERIODO DE LIQUIDACIÓN: 01/03/2025 a 31/03/2025
+
+DEVENGOS:
+────────────────────────────────────────
+Salario base                    1.500,00€
+Plus convenio                     200,00€
+Plus transporte                   100,00€
+Horas extras (5h)                 150,00€
+────────────────────────────────────────
+Total devengos                  1.950,00€
+
+DEDUCCIONES:
+────────────────────────────────────────
+Contingencias comunes 4,70%        91,65€
+Desempleo 1,55%                    30,23€
+Formación profesional 0,10%         1,95€
+IRPF 15%                          292,50€
+────────────────────────────────────────
+Total deducciones                 416,33€
+
+LÍQUIDO A PERCIBIR:             1.533,67€
+
+Fecha de pago: 31/03/2025
+Forma de pago: Transferencia bancaria
+Cuenta: ES98 7654 3210 9876 5432 1098

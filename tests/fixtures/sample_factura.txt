@@ -1,0 +1,38 @@
+FACTURA N.º 2025/001
+
+Fecha de emisión: 15 de marzo de 2025
+Fecha de vencimiento: 15 de abril de 2025
+
+EMISOR:
+ABC Servicios Profesionales S.L.
+NIF: B12345678
+C/ Gran Vía, 123
+28013 Madrid
+Tel: 912 345 678
+Email: facturacion@abcservicios.es
+
+CLIENTE:
+Empresa Test S.L.
+NIF: B87654321
+C/ Alcalá, 456
+28014 Madrid
+
+CONCEPTOS:
+────────────────────────────────────────────────────────
+Descripción                      Cantidad    Precio    Total
+────────────────────────────────────────────────────────
+Servicios de consultoría            10 h    100,00€  1.000,00€
+Desarrollo de software              20 h     75,00€  1.500,00€
+Mantenimiento mensual                1      300,00€    300,00€
+────────────────────────────────────────────────────────
+
+Base imponible:                                      2.800,00€
+IVA (21%):                                             588,00€
+────────────────────────────────────────────────────────
+TOTAL FACTURA:                                       3.388,00€
+
+Forma de pago: Transferencia bancaria
+Cuenta: ES12 1234 5678 9012 3456 7890
+
+Observaciones:
+Pago a 30 días desde la fecha de emisión.

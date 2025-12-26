@@ -1,0 +1,18 @@
+{
+  "total_documents": 1350,
+  "train_size": 944,
+  "val_size": 203,
+  "test_size": 203,
+  "categories": [
+    "contrato",
+    "fiscal",
+    "notificacion",
+    "certificado",
+    "nomina",
+    "recibo",
+    "otro",
+    "presupuesto",
+    "factura"
+  ],
+  "num_categories": 9
+}

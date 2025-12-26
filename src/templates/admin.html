@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Panel de administración - DirectIA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'media',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0ea5e9',
+            secondary: '#1e293b',
+            accent: '#38bdf8'
+          }
+        }
+      }
+    };
+  </script>
+  <script>
+    const TOKEN = "{{ token }}";
+
+    async function call(endpoint, method="POST", data=null) {
+      const options = {
+        method,
+        headers: {
+          "Authorization": "Bearer " + TOKEN,
+          "Content-Type": "application/json"
+        }
+      };
+      if (data) options.body = JSON.stringify(data);
+      const r = await fetch(endpoint, options);
+      return await r.json();
+    }
+
+    // --- Docker panel ---
+    async function status()  { renderOutput(await call("/admin/status", "GET")); }
+    async function start()   { renderOutput(await call("/admin/start")); }
+    async function stop()    { renderOutput(await call("/admin/stop")); }
+    async function restart() { renderOutput(await call("/admin/restart")); }
+
+    function renderOutput(j) {
+      const out = document.getElementById("output");
+      out.textContent = j.output || JSON.stringify(j, null, 2);
+    }
+
+    // --- User panel ---
+    async function loadUsers() {
+      const res = await call("/admin/users", "GET");
+      const table = document.getElementById("users-body");
+      table.innerHTML = "";
+      res.users.forEach(u => {
+        const row = document.createElement("tr");
+        row.classList.add("hover:bg-slate-800");
+
+        row.innerHTML = `
+          <td class="border border-slate-700 p-2">${u.id}</td>
+          <td class="border border-slate-700 p-2">${u.username}</td>
+          <td class="border border-slate-700 p-2">
+            <input id="email-${u.id}" value="${u.email}" class="bg-slate-900 border border-slate-700 rounded px-2 py-1 w-full text-gray-200 text-sm">
+          </td>
+          <td class="border border-slate-700 p-2 relative">
+            <div class="flex items-center">
+              <input id="password-${u.id}" type="password" placeholder="••••••" class="bg-slate-900 border border-slate-700 rounded px-2 py-1 w-full text-gray-200 text-sm pr-8">
+              <button type="button" onclick="togglePassword(${u.id}, this)" class="absolute right-2 text-gray-400 hover:text-gray-200">👁️</button>
+            </div>
+          </td>
+          <td class="border border-slate-700 p-2 text-center">
+            <input id="active-${u.id}" type="checkbox" ${u.active ? "checked" : ""} class="h-4 w-4 accent-green-500">
+          </td>
+          <td class="border border-slate-700 p-2 text-center">${u.role || 'usuario'}</td>
+          <td class="border border-slate-700 p-2 text-center">
+            <button onclick="saveUser(${u.id})" class="bg-green-600 hover:bg-green-500 text-white px-3 py-1 rounded">✔</button>
+          </td>`;
+        table.appendChild(row);
+      });
+    }
+
+    function togglePassword(id, btn) {
+      const input = document.getElementById(`password-${id}`);
+      if (input.type === "password") {
+        input.type = "text";
+        btn.textContent = "🙈";
+      } else {
+        input.type = "password";
+        btn.textContent = "👁️";
+      }
+    }
+
+    async function saveUser(id) {
+      const email = document.getElementById(`email-${id}`).value.trim();
+      const password = document.getElementById(`password-${id}`).value.trim();
+      const active = document.getElementById(`active-${id}`).checked;
+
+      const data = { email, active };
+      if (password) data.password = password;
+
+      const res = await call(`/admin/users/${id}`, "PUT", data);
+      alert(res.msg || "Usuario actualizado correctamente");
+      loadUsers();
+    }
+
+    // --- Modal ---
+    function openModal() {
+      document.getElementById("userModal").classList.remove("hidden");
+    }
+
+    function closeModal() {
+      document.getElementById("userModal").classList.add("hidden");
+      document.getElementById("new-username").value = "";
+      document.getElementById("new-email").value = "";
+      document.getElementById("new-password").value = "";
+      document.getElementById("new-role").value = "usuario";
+    }
+
+    async function createUser() {
+      const username = document.getElementById("new-username").value.trim();
+      const email = document.getElementById("new-email").value.trim();
+      const password = document.getElementById("new-password").value.trim();
+      const role = document.getElementById("new-role").value;
+
+      if (!username || !email || !password) {
+        alert("Todos los campos son obligatorios");
+        return;
+      }
+
+      const res = await call("/admin/users", "POST", { username, email, password, role });
+      alert(res.msg || "Usuario creado correctamente");
+      closeModal();
+      loadUsers();
+    }
+
+    window.addEventListener("load", () => {
+      status();
+      loadUsers();
+    });
+  </script>
+</head>
+
+<body class="bg-slate-900 text-gray-100 min-h-screen font-sans">
+  <div class="max-w-6xl mx-auto p-6">
+    <h1 class="text-3xl font-semibold mb-6 text-accent">Panel de Administración</h1>
+
+    <div class="mb-6 border-b border-slate-700">
+      <nav class="flex space-x-4">
+        <button onclick="showTab('docker')" class="tab-btn py-2 px-3 rounded-t-lg bg-slate-800 text-gray-300 hover:bg-slate-700">Docker</button>
+        <button onclick="showTab('users')"  class="tab-btn py-2 px-3 rounded-t-lg bg-slate-800 text-gray-300 hover:bg-slate-700">Usuarios</button>
+      </nav>
+    </div>
+
+    <!-- Docker Control -->
+    <section id="docker" class="tab">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+        <button onclick="start()"   class="py-2 px-3 rounded-xl bg-green-600 hover:bg-green-500 text-white">Iniciar</button>
+        <button onclick="stop()"    class="py-2 px-3 rounded-xl bg-red-600 hover:bg-red-500 text-white">Detener</button>
+        <button onclick="restart()" class="py-2 px-3 rounded-xl bg-amber-600 hover:bg-amber-500 text-white">Reiniciar</button>
+        <button onclick="status()"  class="py-2 px-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white">Estado</button>
+      </div>
+      <pre id="output" class="p-4 bg-slate-800 rounded-xl text-sm overflow-auto h-80"></pre>
+    </section>
+
+    <!-- User Management -->
+    <section id="users" class="tab hidden">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold">Gestión de usuarios</h2>
+        <div class="space-x-2">
+          <button onclick="openModal()" class="bg-green-700 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm">
+            ➕ Nuevo usuario
+          </button>
+          <button onclick="loadUsers()" class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg text-sm">
+            🔄 Refrescar lista
+          </button>
+        </div>
+      </div>
+
+      <table class="w-full text-left border border-slate-700 text-sm">
+        <thead class="bg-slate-800 text-gray-300">
+          <tr>
+            <th class="p-2 border border-slate-700">ID</th>
+            <th class="p-2 border border-slate-700">Usuario</th>
+            <th class="p-2 border border-slate-700">Email</th>
+            <th class="p-2 border border-slate-700">Contraseña</th>
+            <th class="p-2 border border-slate-700">Activo</th>
+            <th class="p-2 border border-slate-700">Rol</th>
+            <th class="p-2 border border-slate-700 text-center">Acción</th>
+          </tr>
+        </thead>
+        <tbody id="users-body"></tbody>
+      </table>
+    </section>
+  </div>
+
+  <!-- Modal Nuevo Usuario -->
+  <div id="userModal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+    <div class="bg-slate-800 rounded-xl p-6 w-96 shadow-xl">
+      <h3 class="text-lg font-semibold mb-4 text-accent">Añadir nuevo usuario</h3>
+      <div class="space-y-3">
+        <input id="new-username" placeholder="Nombre de usuario" class="w-full px-3 py-2 rounded bg-slate-900 border border-slate-700 text-gray-200 text-sm">
+        <input id="new-email" placeholder="Correo electrónico" class="w-full px-3 py-2 rounded bg-slate-900 border border-slate-700 text-gray-200 text-sm">
+        <input id="new-password" type="password" placeholder="Contraseña" class="w-full px-3 py-2 rounded bg-slate-900 border border-slate-700 text-gray-200 text-sm">
+        <select id="new-role" class="w-full px-3 py-2 rounded bg-slate-900 border border-slate-700 text-gray-200 text-sm">
+          <option value="usuario">Usuario</option>
+          <option value="admin">Administrador</option>
+        </select>
+      </div>
+      <div class="flex justify-end mt-5 space-x-2">
+        <button onclick="closeModal()" class="bg-slate-600 hover:bg-slate-500 text-white px-4 py-2 rounded-lg text-sm">Cancelar</button>
+        <button onclick="createUser()" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(tab) {
+      document.querySelectorAll(".tab").forEach(t => t.classList.add("hidden"));
+      document.getElementById(tab).classList.remove("hidden");
+    }
+  </script>
+</body>
+</html>

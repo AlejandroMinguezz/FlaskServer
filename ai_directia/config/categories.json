@@ -1,0 +1,164 @@
+{
+  "categories": [
+    {
+      "id": "factura",
+      "name": "Factura",
+      "name_en": "Invoice",
+      "folder_path": "/Documentos/Facturas/",
+      "keywords": [
+        "factura",
+        "invoice",
+        "iva",
+        "total",
+        "importe",
+        "número de factura",
+        "n.º factura",
+        "base imponible",
+        "cif",
+        "nif"
+      ],
+      "description": "Documentos de facturación con conceptos, IVA, totales y datos fiscales"
+    },
+    {
+      "id": "contrato",
+      "name": "Contrato",
+      "name_en": "Contract",
+      "folder_path": "/Documentos/Contratos/",
+      "keywords": [
+        "contrato",
+        "contract",
+        "cláusula",
+        "parte contratante",
+        "firmante",
+        "vigencia",
+        "rescisión",
+        "partes",
+        "acuerdo"
+      ],
+      "description": "Contratos con cláusulas legales, firmas y partes contratantes"
+    },
+    {
+      "id": "nomina",
+      "name": "Nómina",
+      "name_en": "Payroll",
+      "folder_path": "/Documentos/Nóminas/",
+      "keywords": [
+        "nómina",
+        "payroll",
+        "salario",
+        "irpf",
+        "seguridad social",
+        "cotización",
+        "líquido a percibir",
+        "devengos",
+        "deducciones",
+        "trabajador"
+      ],
+      "description": "Nóminas con salarios, deducciones y cotizaciones"
+    },
+    {
+      "id": "presupuesto",
+      "name": "Presupuesto",
+      "name_en": "Quote/Budget",
+      "folder_path": "/Documentos/Presupuestos/",
+      "keywords": [
+        "presupuesto",
+        "cotización",
+        "quote",
+        "validez",
+        "oferta",
+        "propuesta",
+        "estimación",
+        "precio estimado"
+      ],
+      "description": "Presupuestos y cotizaciones sin valor fiscal definitivo"
+    },
+    {
+      "id": "recibo",
+      "name": "Recibo",
+      "name_en": "Receipt",
+      "folder_path": "/Documentos/Recibos/",
+      "keywords": [
+        "recibo",
+        "pago",
+        "receipt",
+        "consumo",
+        "periodo de facturación",
+        "comprobante",
+        "luz",
+        "agua",
+        "gas",
+        "alquiler"
+      ],
+      "description": "Recibos de servicios básicos y comprobantes de pago"
+    },
+    {
+      "id": "certificado",
+      "name": "Certificado",
+      "name_en": "Certificate",
+      "folder_path": "/Documentos/Certificados/",
+      "keywords": [
+        "certificado",
+        "certificate",
+        "certifica",
+        "acredita",
+        "expedido por",
+        "título",
+        "diploma",
+        "constancia"
+      ],
+      "description": "Certificados oficiales y documentos acreditativos"
+    },
+    {
+      "id": "fiscal",
+      "name": "Declaración Fiscal",
+      "name_en": "Tax Document",
+      "folder_path": "/Documentos/Fiscales/",
+      "keywords": [
+        "declaración",
+        "modelo",
+        "renta",
+        "hacienda",
+        "tributación",
+        "impuesto",
+        "agencia tributaria",
+        "ejercicio fiscal"
+      ],
+      "description": "Declaraciones fiscales, IRPF, IVA y modelos tributarios"
+    },
+    {
+      "id": "notificacion",
+      "name": "Notificación Administrativa",
+      "name_en": "Administrative Notice",
+      "folder_path": "/Documentos/Notificaciones/",
+      "keywords": [
+        "notificación",
+        "comunicación",
+        "administración",
+        "resolución",
+        "expediente",
+        "registro",
+        "oficial"
+      ],
+      "description": "Notificaciones y comunicaciones oficiales de administraciones"
+    },
+    {
+      "id": "otro",
+      "name": "Otro",
+      "name_en": "Other",
+      "folder_path": "/Documentos/Otros/",
+      "keywords": [],
+      "description": "Documentos que no encajan en las categorías anteriores"
+    }
+  ],
+  "confidence_thresholds": {
+    "high": 0.80,
+    "medium": 0.50,
+    "low": 0.30
+  },
+  "model_config": {
+    "version": "v1",
+    "algorithm": "SVM",
+    "vectorizer": "TF-IDF"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "model_type": "TF-IDF + LinearSVC",
+  "trained_at": "2025-11-09T19:53:44.768942",
+  "train_size": 3360,
+  "val_size": 720,
+  "classes": [
+    "certificado",
+    "contrato",
+    "factura",
+    "fiscal",
+    "nomina",
+    "notificacion",
+    "presupuesto",
+    "recibo"
+  ],
+  "n_classes": 8,
+  "vocab_size": 5000,
+  "hyperparameters": {
+    "max_features": 5000,
+    "ngram_range": [
+      1,
+      2
+    ],
+    "C": 1.0
+  },
+  "metrics": {
+    "train_accuracy": 1.0,
+    "train_f1": 1.0,
+    "val_accuracy": 1.0,
+    "val_f1": 1.0,
+    "test_accuracy": 1.0,
+    "test_f1": 1.0
+  }
+}

@@ -1,0 +1,39 @@
+# Entornos virtuales
+.venv/
+venv/
+__pycache__/
+
+# Archivos de configuración locales
+.env
+.env.*
+!.env.*.example
+docker/.env
+
+# Datos persistentes de bases de datos
+docker-data/
+docker/mongo_data/
+docker/postgres_data/
+mongo_data/
+postgres_data/
+
+# Archivos temporales y logs
+*.log
+*.tmp
+*.pid
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de construcción o backups
+*.bak
+*.swp
+
+# Archivos de entorno IDE
+.vscode/
+.idea/
+
+# Archivos generados por Python
+*.pyc
+*.pyo
+*.pyd

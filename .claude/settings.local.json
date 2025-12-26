@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(where:*)",
+      "Bash(powershell.exe -Command \"New-NetFirewallRule -DisplayName ''DirectIA Flask Server'' -Direction Inbound -LocalPort 5001 -Protocol TCP -Action Allow -Program ''C:\\Users\\aleja\\AppData\\Local\\Programs\\Python\\Python312\\python.exe''\")",
+      "Bash(powershell.exe:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

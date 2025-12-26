@@ -1,0 +1,31 @@
+# DirectIA - AI Classification System Dependencies
+
+# Text Extraction
+PyPDF2==3.0.1
+pdfplumber==0.11.0
+python-docx==1.1.0
+pytesseract==0.3.10
+Pillow==10.2.0
+
+# Text Processing
+nltk==3.8.1
+spacy==3.7.2
+
+# Traditional ML (v1)
+scikit-learn==1.4.0
+joblib==1.3.2
+
+# Deep Learning (v2 - future)
+# torch==2.1.2
+# transformers==4.36.2
+
+# Utilities
+numpy==1.26.4
+pandas==2.2.0
+pyyaml==6.0.1
+
+# Synthetic Data Generation
+Faker==22.0.0
+
+# Testing
+pytest==7.4.4
