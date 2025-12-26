@@ -190,10 +190,8 @@ STORAGE_PATH=../storage/files
 
 - [ ] Endpoints REST versionados.
 - [ ] Canal WebSocket o Celery para resultados IA en tiempo real.
-- [ ] Serialización consistente entre PyQt ↔ Flask.
 - [ ] Autenticación JWT multiusuario.
 - [ ] Configuración de nomenclaturas de archivo personalizadas por carpeta.
-- [ ] Vista previa lateral de documentos (PDF, imágenes).
 - [ ] Modo admin/debug con trazabilidad IA y diagrama ER.
 
 ---
